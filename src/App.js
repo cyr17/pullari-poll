@@ -22,7 +22,7 @@ const App = () => {
   const handleVote = async (filmId) => {
     try {
       console.log(`Voting for filmId: ${filmId}`);
-      await axios.post('http://localhost:5000/vote', { filmId, phoneNumber });
+      await axios.post(`${process.env.API_BASE_URL}/vote`, { filmId, phoneNumber });
       fetchResults();
     } catch (error) {
       console.error('Error voting:', error);
@@ -31,7 +31,7 @@ const App = () => {
 
   const fetchResults = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/results');
+      const response = await axios.get(`${process.env.API_BASE_URL}/results`);
       console.log('Fetched results:', response.data);
       setResults(response.data);
     } catch (error) {

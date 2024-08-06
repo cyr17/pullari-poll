@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const twilio = require('twilio');
 
 const app = express();
@@ -9,6 +10,19 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
+
+
+mongoose.connect('mongodb://localhost:27017/votingApp', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  phoneNumber: String,
+  vote: String,
+  otp: String
+});
+
+const User = mongoose.model('User', userSchema);
+
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -83,7 +97,7 @@ app.post('/vote', (req, res) => {
 });
 
 app.get('/results', (req, res) => {
-  // Your code for handling /results route
+  res.send(votes);
 });
 
 app.listen(PORT, () => {

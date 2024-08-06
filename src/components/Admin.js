@@ -12,7 +12,7 @@ const Admin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Save the film to your backend or database
-    await axios.post('http://localhost:5000/films', film);
+    await axios.post(`${process.env.API_BASE_URL}/films`, film);
     setFilm({ title: '', url: '' });
   };
 
