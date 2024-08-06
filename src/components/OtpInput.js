@@ -21,7 +21,7 @@ const OtpInput = ({ onVerify }) => {
   const verifyOtp = async () => {
     try {
       await axios.post('http://localhost:5000/verify-otp', { phoneNumber, otp });
-      onVerify();
+      onVerify(phoneNumber);
       setError('');
     } catch (error) {
       console.error('Error verifying OTP:', error);

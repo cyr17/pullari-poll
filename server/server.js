@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -18,7 +19,6 @@ let votes = {};
 let verifiedUsers = {};
 // verified users. append '+61420988443'
 
-
 const userVotes = {}; // Track the last vote cast by each verified user
 
 app.post('/send-otp', (req, res) => {
@@ -28,7 +28,7 @@ app.post('/send-otp', (req, res) => {
 
   client.messages.create({
     body: `Your OTP is ${otp}`,
-    from: '+12512612372',
+    from: process.env.TWILIO_PHONE_NUMBER,
     to: phoneNumber
   }).then(message => res.send({ success: true, messageSid: message.sid }))
     .catch(error => res.status(500).send({ success: false, error }));
@@ -39,16 +39,27 @@ app.post('/verify-otp', (req, res) => {
   if (otpStore[phoneNumber] === otp) {
     delete otpStore[phoneNumber];
     verifiedUsers[phoneNumber] = true; // Mark user as verified
+    console.log(`User verified: ${phoneNumber}`); // Log verification
     res.send({ success: true });
   } else {
     res.status(400).send({ success: false, message: 'Invalid OTP' });
   }
 });
 
+// Example endpoint to check if a user is verified
+app.get('/is-verified', (req, res) => {
+  const { phoneNumber } = req.query;
+  if (verifiedUsers[phoneNumber]) {
+    res.send({ success: true, verified: true });
+  } else {
+    res.send({ success: false, verified: false });
+  }
+});
+
 app.post('/vote', (req, res) => {
     const { phoneNumber, filmId } = req.body;
     console.log(`Vote request from: ${phoneNumber} for filmId: ${filmId}`);
-    console.log(votes);
+    
     if (!verifiedUsers[phoneNumber]) {
       console.log(`User not verified: ${phoneNumber}`);
       return res.status(403).send({ success: false, message: 'User not verified' });
@@ -66,6 +77,7 @@ app.post('/vote', (req, res) => {
     votes[filmId] = 0;
   }
   votes[filmId] += 1;
+  console.log(votes);
 
   res.send({ success: true });
 });
