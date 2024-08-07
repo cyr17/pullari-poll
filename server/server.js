@@ -6,11 +6,6 @@ const mongoose = require('mongoose');
 const twilio = require('twilio');
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-
-const PORT = process.env.PORT || 5000;
-
 
 const corsOptions = {
   origin: 'https://pullari-poll.vercel.app', // your front-end URL
@@ -18,6 +13,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(bodyParser.json());
+
+const PORT = process.env.PORT || 5000;
 
 mongoose.connect('mongodb://localhost:27017/votingApp', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -30,7 +28,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
@@ -38,9 +35,9 @@ const client = twilio(accountSid, authToken);
 let otpStore = {};
 let votes = {};
 let verifiedUsers = {};
-// verified users. append '+61420988443'
 
-const userVotes = {}; // Track the last vote cast by each verified user
+// Track the last vote cast by each verified user
+const userVotes = {};
 
 app.post('/send-otp', (req, res) => {
   const { phoneNumber } = req.body;
@@ -78,13 +75,13 @@ app.get('/is-verified', (req, res) => {
 });
 
 app.post('/vote', (req, res) => {
-    const { phoneNumber, filmId } = req.body;
-    console.log(`Vote request from: ${phoneNumber} for filmId: ${filmId}`);
-    
-    if (!verifiedUsers[phoneNumber]) {
-      console.log(`User not verified: ${phoneNumber}`);
-      return res.status(403).send({ success: false, message: 'User not verified' });
-    }
+  const { phoneNumber, filmId } = req.body;
+  console.log(`Vote request from: ${phoneNumber} for filmId: ${filmId}`);
+  
+  if (!verifiedUsers[phoneNumber]) {
+    console.log(`User not verified: ${phoneNumber}`);
+    return res.status(403).send({ success: false, message: 'User not verified' });
+  }
 
   // If the user has already voted, decrement the previous vote
   if (userVotes[phoneNumber]) {
