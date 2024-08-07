@@ -9,7 +9,20 @@ const OtpInput = ({ onVerify }) => {
   const API_BASE_URL='https://pullariserver.vercel.app';
   const sendOtp = async () => {
     try {
-      await axios.post(`${API_BASE_URL}/send-otp`, { phoneNumber });
+      await axios.post(
+        `${API_BASE_URL}/send-otp`,
+        { phoneNumber },
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', // Ensure content type is set to JSON
+            // 'Access-Control-Allow-Origin': '*', // Usually set on the server
+            // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', // Usually set on the server
+            // 'Access-Control-Request-Method': 'POST', // Usually set on the server
+            // Add any other headers you need for your API here
+          }
+        }
+      );
       setIsOtpSent(true);
       setError('');
     } catch (error) {
@@ -17,10 +30,23 @@ const OtpInput = ({ onVerify }) => {
       setError('Failed to send OTP. Please try again.');
     }
   };
-
+  
   const verifyOtp = async () => {
     try {
-      await axios.post(`${API_BASE_URL}/verify-otp`, { phoneNumber, otp });
+      await axios.post(
+        `${API_BASE_URL}/verify-otp`,
+        { phoneNumber, otp },
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', // Ensure content type is set to JSON
+            // 'Access-Control-Allow-Origin': '*', // Usually set on the server
+            // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', // Usually set on the server
+            // 'Access-Control-Request-Method': 'POST', // Usually set on the server
+            // Add any other headers you need for your API here
+          }
+        }
+      );
       onVerify(phoneNumber);
       setError('');
     } catch (error) {

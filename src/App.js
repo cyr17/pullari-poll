@@ -22,7 +22,18 @@ const App = () => {
   const handleVote = async (filmId) => {
     try {
       console.log(`Voting for filmId: ${filmId}`);
-      await axios.post(`${API_BASE_URL}/vote`, { filmId, phoneNumber });
+      const response = await axios.post(
+        `${API_BASE_URL}/vote`,
+        { filmId, phoneNumber },
+        {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', // Axios defaults to this, but it's good to be explicit
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',// Replace with actual auth if needed
+          }
+        }
+      );
       fetchResults();
     } catch (error) {
       console.error('Error voting:', error);
