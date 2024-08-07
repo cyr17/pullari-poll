@@ -7,6 +7,7 @@ const twilio = require('twilio');
 
 const app = express();
 
+// CORS configuration
 const corsOptions = {
   origin: 'https://pullari-poll.vercel.app', // your front-end URL
   optionsSuccessStatus: 200
@@ -39,7 +40,10 @@ let verifiedUsers = {};
 // Track the last vote cast by each verified user
 const userVotes = {};
 
-app.post('/send-otp', (req, res) => {
+// Define routes
+app.options('*', cors(corsOptions)); // preflight requests
+
+app.post('/send-otp', cors(corsOptions), (req, res) => {
   const { phoneNumber } = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   otpStore[phoneNumber] = otp;
@@ -52,7 +56,7 @@ app.post('/send-otp', (req, res) => {
     .catch(error => res.status(500).send({ success: false, error }));
 });
 
-app.post('/verify-otp', (req, res) => {
+app.post('/verify-otp', cors(corsOptions), (req, res) => {
   const { phoneNumber, otp } = req.body;
   if (otpStore[phoneNumber] === otp) {
     delete otpStore[phoneNumber];
@@ -64,8 +68,7 @@ app.post('/verify-otp', (req, res) => {
   }
 });
 
-// Example endpoint to check if a user is verified
-app.get('/is-verified', (req, res) => {
+app.get('/is-verified', cors(corsOptions), (req, res) => {
   const { phoneNumber } = req.query;
   if (verifiedUsers[phoneNumber]) {
     res.send({ success: true, verified: true });
@@ -74,7 +77,7 @@ app.get('/is-verified', (req, res) => {
   }
 });
 
-app.post('/vote', (req, res) => {
+app.post('/vote', cors(corsOptions), (req, res) => {
   const { phoneNumber, filmId } = req.body;
   console.log(`Vote request from: ${phoneNumber} for filmId: ${filmId}`);
   
@@ -100,7 +103,7 @@ app.post('/vote', (req, res) => {
   res.send({ success: true });
 });
 
-app.get('/results', (req, res) => {
+app.get('/results', cors(corsOptions), (req, res) => {
   res.send(votes);
 });
 
