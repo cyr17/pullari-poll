@@ -6,7 +6,7 @@ const OtpInput = ({ onVerify }) => {
   const [otp, setOtp] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [error, setError] = useState('');
-  const API_BASE_URL='https://pullariserver.vercel.app/';
+  const API_BASE_URL='https://pullariserver.vercel.app';
   const sendOtp = async () => {
     try {
       await axios.post(`${API_BASE_URL}/send-otp`, { phoneNumber });
