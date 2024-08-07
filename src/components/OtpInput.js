@@ -16,6 +16,7 @@ const OtpInput = ({ onVerify }) => {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json', // Ensure content type is set to JSON
+            'Access-Control-Allow-Origin': 'https://pullari-poll.vercel.app', // Replace with your front-end URL
             // 'Access-Control-Allow-Origin': '*', // Usually set on the server
             // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', // Usually set on the server
             // 'Access-Control-Request-Method': 'POST', // Usually set on the server
@@ -40,6 +41,7 @@ const OtpInput = ({ onVerify }) => {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json', // Ensure content type is set to JSON
+            'Access-Control-Allow-Origin': 'https://pullari-poll.vercel.app', // Replace with your front-end URL
             // 'Access-Control-Allow-Origin': '*', // Usually set on the server
             // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', // Usually set on the server
             // 'Access-Control-Request-Method': 'POST', // Usually set on the server

@@ -29,7 +29,7 @@ const App = () => {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json', // Axios defaults to this, but it's good to be explicit
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': 'https://pullari-poll.vercel.app', // Replace with your front-end URL
             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',// Replace with actual auth if needed
           }
         }
