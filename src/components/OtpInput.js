@@ -10,7 +10,7 @@ const OtpInput = ({ onVerify }) => {
   const sendOtp = async () => {
     try {
       await axios.post(
-        `${API_BASE_URL}/send-otp`,
+        `/send-otp`,
         { phoneNumber },
         {
           headers: {
@@ -34,7 +34,7 @@ const OtpInput = ({ onVerify }) => {
   const verifyOtp = async () => {
     try {
       await axios.post(
-        `${API_BASE_URL}/verify-otp`,
+        `/verify-otp`,
         { phoneNumber, otp },
         {
           headers: {
