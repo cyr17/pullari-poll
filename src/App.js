@@ -12,7 +12,7 @@ const App = () => {
   const [results, setResults] = useState({});
   const [isVerified, setIsVerified] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
-
+  const API_BASE_URL='https://pullari-poll-n48l.vercel.app';
   useEffect(() => {
     if (isVerified) {
       fetchResults();
@@ -22,7 +22,7 @@ const App = () => {
   const handleVote = async (filmId) => {
     try {
       console.log(`Voting for filmId: ${filmId}`);
-      await axios.post(`${process.env.API_BASE_URL}/vote`, { filmId, phoneNumber });
+      await axios.post(`${API_BASE_URL}/vote`, { filmId, phoneNumber });
       fetchResults();
     } catch (error) {
       console.error('Error voting:', error);
@@ -31,7 +31,7 @@ const App = () => {
 
   const fetchResults = async () => {
     try {
-      const response = await axios.get(`${process.env.API_BASE_URL}/results`);
+      const response = await axios.get(`${API_BASE_URL}/results`);
       console.log('Fetched results:', response.data);
       setResults(response.data);
     } catch (error) {

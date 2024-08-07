@@ -12,6 +12,13 @@ app.use(bodyParser.json());
 const PORT = process.env.PORT || 5000;
 
 
+const corsOptions = {
+  origin: 'https://pullari-poll.vercel.app', // your front-end URL
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 mongoose.connect('mongodb://localhost:27017/votingApp', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const userSchema = new mongoose.Schema({

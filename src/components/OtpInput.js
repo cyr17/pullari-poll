@@ -6,10 +6,10 @@ const OtpInput = ({ onVerify }) => {
   const [otp, setOtp] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [error, setError] = useState('');
-
+  const API_BASE_URL='https://pullari-poll-n48l.vercel.app';
   const sendOtp = async () => {
     try {
-      await axios.post(`${process.env.API_BASE_URL}/send-otp`, { phoneNumber });
+      await axios.post(`${API_BASE_URL}/send-otp`, { phoneNumber });
       setIsOtpSent(true);
       setError('');
     } catch (error) {
@@ -20,7 +20,7 @@ const OtpInput = ({ onVerify }) => {
 
   const verifyOtp = async () => {
     try {
-      await axios.post(`${process.env.API_BASE_URL}/verify-otp`, { phoneNumber, otp });
+      await axios.post(`${API_BASE_URL}/verify-otp`, { phoneNumber, otp });
       onVerify(phoneNumber);
       setError('');
     } catch (error) {

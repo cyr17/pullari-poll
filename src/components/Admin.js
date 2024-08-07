@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Admin = () => {
   const [film, setFilm] = useState({ title: '', url: '' });
-
+  const API_BASE_URL='https://pullari-poll-n48l.vercel.app';
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFilm({ ...film, [name]: value });
@@ -12,7 +12,7 @@ const Admin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Save the film to your backend or database
-    await axios.post(`${process.env.API_BASE_URL}/films`, film);
+    await axios.post(`${API_BASE_URL}/films`, film);
     setFilm({ title: '', url: '' });
   };
 
