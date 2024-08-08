@@ -20,27 +20,38 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 
-// mongoose.connect('mongodb://localhost:27017/votingApp', { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoURI = process.env.MONGO_URI;
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
-// const userSchema = new mongoose.Schema({
-//   name: String,
-//   phoneNumber: String,
-//   vote: String,
-//   otp: String
-// });
+const userSchema = new mongoose.Schema({
+  name: String,
+  phoneNumber: { type: String, unique: true }
+});
 
-// const User = mongoose.model('User', userSchema);
+const otpSchema = new mongoose.Schema({
+  phoneNumber: { type: String, unique: true },
+  otp: String
+});
+
+const verifiedUserSchema = new mongoose.Schema({
+  phoneNumber: { type: String, unique: true }
+});
+
+const voteSchema = new mongoose.Schema({
+  phoneNumber: { type: String, unique: true },
+  filmId: String
+});
+
+const User = mongoose.model('User', userSchema);
+const Otp = mongoose.model('Otp', otpSchema);
+const VerifiedUser = mongoose.model('VerifiedUser', verifiedUserSchema);
+const Vote = mongoose.model('Vote', voteSchema);
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
-
-let otpStore = {};
-let votes = {};
-let verifiedUsers = {};
-
-// Track the last vote cast by each verified user
-const userVotes = {};
 
 // Define routes
 app.options('*', cors(corsOptions)); // preflight requests
@@ -52,74 +63,93 @@ app.use((req, res, next) => {
   next();
 });
 
-
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
   res.send('Connected to Server!');
-}
-);
+});
 
-app.post('/send-otp', cors(corsOptions), (req, res) => {
+app.post('/send-otp', cors(corsOptions), async (req, res) => {
   const { phoneNumber } = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  otpStore[phoneNumber] = otp;
 
-  client.messages.create({
-    body: `Your OTP is ${otp}`,
-    from: process.env.TWILIO_PHONE_NUMBER,
-    to: phoneNumber
-  }).then(message => res.send({ success: true, messageSid: message.sid }))
-    .catch(error => res.status(500).send({ success: false, error }));
-});
-
-app.post('/verify-otp', cors(corsOptions), (req, res) => {
-  const { phoneNumber, otp } = req.body;
-  if (otpStore[phoneNumber] === otp) {
-    delete otpStore[phoneNumber];
-    verifiedUsers[phoneNumber] = true; // Mark user as verified
-    console.log(`User verified: ${phoneNumber}`); // Log verification
+  try {
+    await Otp.findOneAndUpdate({ phoneNumber }, { otp }, { upsert: true, new: true });
+    await client.messages.create({
+      body: `Your OTP is ${otp}`,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: phoneNumber
+    });
     res.send({ success: true });
-  } else {
-    res.status(400).send({ success: false, message: 'Invalid OTP' });
+  } catch (error) {
+    res.status(500).send({ success: false, error });
   }
 });
 
-app.get('/is-verified', cors(corsOptions), (req, res) => {
+app.post('/verify-otp', cors(corsOptions), async (req, res) => {
+  const { phoneNumber, otp } = req.body;
+
+  try {
+    const otpRecord = await Otp.findOne({ phoneNumber });
+    if (otpRecord && otpRecord.otp === otp) {
+      await Otp.deleteOne({ phoneNumber });
+      await VerifiedUser.findOneAndUpdate({ phoneNumber }, {}, { upsert: true, new: true });
+      console.log(`User verified: ${phoneNumber}`);
+      res.send({ success: true });
+    } else {
+      res.status(400).send({ success: false, message: 'Invalid OTP' });
+    }
+  } catch (error) {
+    res.status(500).send({ success: false, error });
+  }
+});
+
+app.get('/is-verified', cors(corsOptions), async (req, res) => {
   const { phoneNumber } = req.query;
-  if (verifiedUsers[phoneNumber]) {
-    res.send({ success: true, verified: true });
-  } else {
-    res.send({ success: false, verified: false });
+
+  try {
+    const verifiedUser = await VerifiedUser.findOne({ phoneNumber });
+    if (verifiedUser) {
+      res.send({ success: true, verified: true });
+    } else {
+      res.send({ success: false, verified: false });
+    }
+  } catch (error) {
+    res.status(500).send({ success: false, error });
   }
 });
 
-app.post('/vote', cors(corsOptions), (req, res) => {
+app.post('/vote', cors(corsOptions), async (req, res) => {
   const { phoneNumber, filmId } = req.body;
   console.log(`Vote request from: ${phoneNumber} for filmId: ${filmId}`);
-  
-  if (!verifiedUsers[phoneNumber]) {
-    console.log(`User not verified: ${phoneNumber}`);
-    return res.status(403).send({ success: false, message: 'User not verified' });
-  }
 
-  // If the user has already voted, decrement the previous vote
-  if (userVotes[phoneNumber]) {
-    const previousVote = userVotes[phoneNumber];
-    votes[previousVote] -= 1;
-  }
+  try {
+    const verifiedUser = await VerifiedUser.findOne({ phoneNumber });
+    if (!verifiedUser) {
+      console.log(`User not verified: ${phoneNumber}`);
+      return res.status(403).send({ success: false, message: 'User not verified' });
+    }
 
-  // Record the new vote
-  userVotes[phoneNumber] = filmId;
-  if (!votes[filmId]) {
-    votes[filmId] = 0;
-  }
-  votes[filmId] += 1;
-  console.log(votes);
+    const existingVote = await Vote.findOne({ phoneNumber });
+    if (existingVote) {
+      await Vote.updateOne({ phoneNumber }, { filmId });
+    } else {
+      await Vote.create({ phoneNumber, filmId });
+    }
 
-  res.send({ success: true });
+    res.send({ success: true });
+  } catch (error) {
+    res.status(500).send({ success: false, error });
+  }
 });
 
-app.get('/results', cors(corsOptions), (req, res) => {
-  res.send(votes);
+app.get('/results', cors(corsOptions), async (req, res) => {
+  try {
+    const votes = await Vote.aggregate([
+      { $group: { _id: "$filmId", count: { $sum: 1 } } }
+    ]);
+    res.send(votes);
+  } catch (error) {
+    res.status(500).send({ success: false, error });
+  }
 });
 
 app.listen(PORT, () => {
