@@ -12,7 +12,7 @@ const App = () => {
   const [results, setResults] = useState({});
   const [isVerified, setIsVerified] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
-  const API_BASE_URL='https://pullariserver.vercel.app';
+  const API_BASE_URL='https://pullaripollserver.vercel.app';
   useEffect(() => {
     if (isVerified) {
       fetchResults();
