@@ -20,16 +20,16 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://localhost:27017/votingApp', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb://localhost:27017/votingApp', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  phoneNumber: String,
-  vote: String,
-  otp: String
-});
+// const userSchema = new mongoose.Schema({
+//   name: String,
+//   phoneNumber: String,
+//   vote: String,
+//   otp: String
+// });
 
-const User = mongoose.model('User', userSchema);
+// const User = mongoose.model('User', userSchema);
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -44,6 +44,8 @@ const userVotes = {};
 
 // Define routes
 app.options('*', cors(corsOptions)); // preflight requests
+
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.post('/send-otp', cors(corsOptions), (req, res) => {
   const { phoneNumber } = req.body;
