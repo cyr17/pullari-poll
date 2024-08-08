@@ -1,5 +1,8 @@
 import React from 'react';
 
+
+import { Button } from 'flowbite-react';
+
 const Film = ({ film, onVote }) => {
   return (
     <div>
@@ -14,7 +17,7 @@ const Film = ({ film, onVote }) => {
         referrerpolicy="strict-origin-when-cross-origin" 
         allowfullscreen>
       </iframe>
-      <button onClick={() => onVote(film.id)}>Vote</button>
+      <Button onClick={() => onVote(film.id)}>Vote</Button>
     </div>
   );
 };
