@@ -8,27 +8,35 @@ const OtpInput = ({ onVerify }) => {
   const [error, setError] = useState('');
   const API_BASE_URL='https://pullaripollserver.vercel.app';
   const sendOtp = async () => {
+    // try {
+    //   await axios.post(
+    //     `${API_BASE_URL}/send-otp`,
+    //     { phoneNumber },
+    //     {
+    //       headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json', // Ensure content type is set to JSON
+    //         'Access-Control-Allow-Origin': 'https://pullari-poll.vercel.app', // Replace with your front-end URL
+    //         // 'Access-Control-Allow-Origin': '*', // Usually set on the server
+    //         // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', // Usually set on the server
+    //         // 'Access-Control-Request-Method': 'POST', // Usually set on the server
+    //         // Add any other headers you need for your API here
+    //       }
+    //     }
+    //   );
+    //   setIsOtpSent(true);
+    //   setError('');
+    // } catch (error) {
+    //   console.error('Error sending OTP:', error);
+    //   setError('Failed to send OTP. Please try again.');
+    // }
+
+    // test out the get /results endpoint here
     try {
-      await axios.post(
-        `${API_BASE_URL}/send-otp`,
-        { phoneNumber },
-        {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json', // Ensure content type is set to JSON
-            'Access-Control-Allow-Origin': 'https://pullari-poll.vercel.app', // Replace with your front-end URL
-            // 'Access-Control-Allow-Origin': '*', // Usually set on the server
-            // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization', // Usually set on the server
-            // 'Access-Control-Request-Method': 'POST', // Usually set on the server
-            // Add any other headers you need for your API here
-          }
-        }
-      );
-      setIsOtpSent(true);
-      setError('');
+      const response = await axios.get(`${API_BASE_URL}/results`);
+      console.log('Fetched results:', response.data);
     } catch (error) {
-      console.error('Error sending OTP:', error);
-      setError('Failed to send OTP. Please try again.');
+      console.error('Error fetching results:', error);
     }
   };
   
