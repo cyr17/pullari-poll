@@ -16,10 +16,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:server": "node server/server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://pullariserver.vercel.app/",
   "eslintConfig": {
     "extends": [
       "react-app",
