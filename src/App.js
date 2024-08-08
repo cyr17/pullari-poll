@@ -7,7 +7,7 @@ const App = () => {
   const [films, setFilms] = useState([
     { id: 1, title: 'BARCA VS REAL', url: 'https://www.youtube.com/embed/tpIyMNGK07g?si=LyjDFHT7k188gVQV' },
     { id: 2, title: 'CITY VS CHELSEA', url: 'https://www.youtube.com/embed/I-dHFeNM6pI?si=YLxToue6NkMf5vQN' },
-    // Add more films here
+    
   ]);
   const [results, setResults] = useState({});
   const [isVerified, setIsVerified] = useState(false);
