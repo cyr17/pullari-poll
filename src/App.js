@@ -15,7 +15,7 @@ const App = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [selectedFilmId, setSelectedFilmId] = useState(null);
-  const API_BASE_URL = 'https://pullaripollserver.vercel.app';
+  const API_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
 
   const handleSendOtp = async () => {
     try {

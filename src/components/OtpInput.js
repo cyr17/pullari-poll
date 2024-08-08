@@ -6,8 +6,10 @@ const OtpInput = ({ onVerify }) => {
   const [otp, setOtp] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [error, setError] = useState('');
-  const API_BASE_URL='https://pullaripollserver.vercel.app';
+  const API_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const sendOtp = async () => {
+    
+  console.log('API_BASE_URL:', API_BASE_URL);
     try {
       const response = await axios.get(`${API_BASE_URL}/results`);
       console.log('Fetched results:', response.data);
