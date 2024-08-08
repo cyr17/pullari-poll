@@ -12,7 +12,7 @@ const corsOptions = {
   origin: 'https://pullari-poll.vercel.app', // your front-end URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -44,6 +44,12 @@ const userVotes = {};
 
 // Define routes
 app.options('*', cors(corsOptions)); // preflight requests
+
+
+app.get('/',(req,res)=>{
+  res.send('Connected to Server!');
+}
+);
 
 app.post('/send-otp', cors(corsOptions), (req, res) => {
   const { phoneNumber } = req.body;

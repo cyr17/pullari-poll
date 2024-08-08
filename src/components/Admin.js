@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Admin = () => {
   const [film, setFilm] = useState({ title: '', url: '' });
-  const API_BASE_URL='https://pullariserver.vercel.app';
+  const API_BASE_URL='https://pullaripollserver.vercel.app'
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFilm({ ...film, [name]: value });
