@@ -8,7 +8,7 @@ const NavbarComponent = () => {
   };
 
   return (
-    <nav className="border-gray-200 bg-gray-400 dark:bg-gray-800 dark:border-gray-700">
+    <nav className="border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
       <div className="flex flex-wrap items-center justify-between mx-auto p-5">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           </a>

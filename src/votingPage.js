@@ -79,7 +79,7 @@ const VotingPage = () => {
   return (
     <div>
       <NavbarComponent></NavbarComponent>
-      <div className='bg-gray-400 py-8 px-10'>
+      <div className='bg-gray-100 py-8 px-10'>
         <div className='container mx-auto mt-8'>
           <img
             className="w-full max-w-full rounded-lg shadow-lg mt-4"
