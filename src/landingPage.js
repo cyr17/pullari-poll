@@ -5,7 +5,7 @@ const LandingPage = () => {
         <div className="bg-cream min-h-screen flex flex-col items-center justify-center bg-cover bg-center" style={{ backgroundImage: 'url(/bg-film.png)' }}>
           
         <div className="flex flex-col items-center p-4 sm:p-0">
-        <img src="/Logo-embossed.jpg" alt="City Icon" className="mx-auto h-15 sm:h-48 rounded-full " />
+        <img src="https://firebasestorage.googleapis.com/v0/b/ballistiks-cyr17.appspot.com/o/Logo-embossed.jpg?alt=media&token=6b22c355-355b-4919-a130-1c8f36584e79" alt="City Icon" className="mx-auto h-15 sm:h-48 rounded-full " />
         
         <h1 className="text-3xl font-bold mt-4">SHORT FILM COMPETITION</h1>
         <h2 className="text-xl font-medium text-gray-400 mb-10">2024 CONTEST</h2>

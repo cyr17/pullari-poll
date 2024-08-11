@@ -83,7 +83,7 @@ const VotingPage = () => {
         <div className='container mx-auto mt-8'>
           <img
             className="w-full max-w-full rounded-lg shadow-lg mt-4"
-            src="/PSFF Banner.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/ballistiks-cyr17.appspot.com/o/PSFF%20Banner.JPG?alt=media&token=ca1a5fbc-76d6-465c-aa92-39e492ed62b1"
             alt="Sponsor"
           />
           <div className="text-center">
@@ -112,7 +112,7 @@ const VotingPage = () => {
                   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
                       alt="Pullari Short Film Competition"
-                      src="/Logo-embossed.jpg"
+                      src="https://firebasestorage.googleapis.com/v0/b/ballistiks-cyr17.appspot.com/o/Logo-embossed.jpg?alt=media&token=6b22c355-355b-4919-a130-1c8f36584e79"
                       className="mx-auto h-15 sm:h-48 rounded-full "
                     />
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
