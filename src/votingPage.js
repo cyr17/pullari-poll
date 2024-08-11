@@ -21,13 +21,14 @@ const VotingPage = () => {
   const [isOtpStage, setIsOtpStage] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [userName, setUserName] = useState('');
   const [otp, setOtp] = useState('');
   const [selectedFilmId, setSelectedFilmId] = useState(null);
   const API_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
 
   const handleSendOtp = async () => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/send-otp`, { phoneNumber });
+      const response = await axios.post(`${API_BASE_URL}/send-otp`, { userName, phoneNumber });
       console.log(response.data);
       setIsOtpStage(true);
     } catch (error) {
@@ -130,6 +131,8 @@ const VotingPage = () => {
                             id="name"
                             name="name"
                             type="text"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
                             placeholder="Enter your name"
                             required
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
