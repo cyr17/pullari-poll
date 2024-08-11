@@ -53,6 +53,11 @@ const VotingPage = () => {
     }
   };
 
+  const handleChangedVote = (filmId) => {
+    setSelectedFilmId(filmId);
+    toast.success('Vote changed successfully!');
+  };
+
   const handleVote = async (filmId) => {
     setIsVerified(true);
     try {
@@ -77,6 +82,23 @@ const VotingPage = () => {
     setOtp('');
   };
 
+  const voteForFilm = async (filmId) => {
+    try {
+      if (isVerified) {
+        // Directly change the vote if the user is verified
+        
+        setSelectedFilmId(filmId);
+        toast.success('Your vote has been changed!');
+      } else {
+        // Open modal for verification
+        setSelectedFilmId(filmId);
+        setIsModalOpen(true);
+      }
+    } catch (error) {
+      console.error('Error voting:', error);
+    }
+  };
+
   return (
     <div>
       <NavbarComponent></NavbarComponent>
@@ -91,24 +113,16 @@ const VotingPage = () => {
             <p className="text-lg text-center text-black mb-8">
               Step into a world of cinematic wonders and cast your vote for the most captivating film!
             </p>
-            <a
-              className="inline-block text-blue-700 font-bold py-2 px-4 hover:underline transition duration-300"
-              href="/ranking"
-              target="_self"
-            >
-              View Ranking
-            </a>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-0.5 sm:px-10 ">
             {films.map((film) => (
-              <Film key={film.id} film={film} onVote={openModal} /> // Use the Film component
+              <Film key={film.id} film={film} onVote={openModal} votedFilm={selectedFilmId} voteForFilm={voteForFilm}/> // Use the Film component
             ))}
           </div>
           <Modal show={isModalOpen} onClose={closeModal}>
-            <Modal.Header>User Verification</Modal.Header>
-            <Modal.Body>
-              {!isVerified ? (
+          <Modal.Header>User Verification</Modal.Header>
+                <Modal.Body>
                 <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
@@ -201,12 +215,9 @@ const VotingPage = () => {
                     </form>
                   </div>
                 </div>
-              ) : (
-                <div className="flex flex-col items-center">
-                  <h1 className='text-2xl font-bold'>Verified User</h1>
-                </div>
-              )}
+                
             </Modal.Body>
+            
           </Modal>
           <ToastContainer />
         </div>

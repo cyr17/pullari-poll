@@ -42,10 +42,11 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 
-const mongoURI = process.env.MONGO_URI;
+const mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
+
   
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -79,13 +80,15 @@ app.post('/send-otp', cors(corsOptions), async (req, res) => {
 
   try{
     
-      const user = await User.findOne({phoneNumber: phoneNumber});
+      console.log("TRYING",phoneNumber);
+      const user = await User.findOne({phoneNumber: formattedPhoneNumber});
       if(user){
         user.otp = otp;
         await user.save();
         console.log("UPDATED",user);
       }
       else{
+        console.log("NEW USER");
         const newUser = new User();
         newUser.name = userName;
         newUser.phoneNumber= formattedPhoneNumber,
@@ -93,6 +96,7 @@ app.post('/send-otp', cors(corsOptions), async (req, res) => {
         await newUser.save();
         console.log("SAVEDD",newUser);
       }
+    console.log("SENDING OTP");
 
     await client.messages.create({
       body: message,
@@ -110,9 +114,12 @@ app.post('/send-otp', cors(corsOptions), async (req, res) => {
 
 app.post('/verify-otp', cors(corsOptions), async (req, res) => {
   const { phoneNumber, otp } = req.body;
-
+  
+  const formattedPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.replace('0', '+61') : phoneNumber;
+  console.log("VERIFY OTP",phoneNumber,otp);
     try {
-      const user = await User.findOne({phoneNumber: phoneNumber});
+      const user = await User.findOne({phoneNumber: formattedPhoneNumber});
+      console.log("USER",user);
       if ( user.otp === otp ) {
         user.isVerified = true;
         await user.save();
@@ -128,8 +135,10 @@ app.post('/verify-otp', cors(corsOptions), async (req, res) => {
 
 app.get('/is-verified', cors(corsOptions), async (req, res) => {
   const { phoneNumber } = req.query;
+  
+  const formattedPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.replace('0', '+61') : phoneNumber;
   try {
-    const user = await User.findOne({ phoneNumber: phoneNumber });
+    const user = await User.findOne({ phoneNumber: formattedPhoneNumber });
     res.send({ success: true, verified: user.isVerified });
   } catch (error) {
     console.log(error);
@@ -140,8 +149,10 @@ app.get('/is-verified', cors(corsOptions), async (req, res) => {
 
 app.post('/vote', cors(corsOptions), async (req, res) => {
   const { phoneNumber, filmId } = req.body;
+  
+  const formattedPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.replace('0', '+61') : phoneNumber;
   try {
-    const user = await User.findOne({ phoneNumber: phoneNumber });
+    const user = await User.findOne({ phoneNumber: formattedPhoneNumber });
     if (user.isVerified) {
       user.vote = filmId;
       await user.save();

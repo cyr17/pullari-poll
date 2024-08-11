@@ -1,6 +1,10 @@
 import React from 'react';
-
-const Film = ({ film, onVote }) => {
+import { toast } from 'react-toastify';
+const Film = ({ film ,votedFilm, voteForFilm}) => {
+  const handleVote = () => {
+    voteForFilm(film.id);
+    toast.success('Your vote has been changed!');
+  };
   return (
     <div className="p-4 rounded-lg shadow-md bg-white relative">
       <div className="aspect-w-16 aspect-h-9 mb-4 rounded-lg overflow-hidden">
@@ -20,10 +24,20 @@ const Film = ({ film, onVote }) => {
       
       <h3 className="text-xl font-bold mb-2">{film.title}</h3>
       <p className="text-gray-600 text-sm">{film.description}</p>
-      <div className="flex justify-center mt-4">
-   
-      <button className="bg-blue-100 hover:bg-blue-200 text-blue-600 font-bold py-3 px-8 rounded-full" onClick={() => onVote(film.id)} >Vote</button>
-      </div>
+      
+      {votedFilm === film.id?(
+        <div className="flex justify-center mt-4">
+          <button className="bg-blue-100 hover:bg-blue-200 text-green-600 font-bold py-3 px-8 rounded-full" >Voted</button>
+        </div>
+      ):(
+        <div className="flex justify-center mt-4">
+          <button className="bg-blue-100 hover:bg-blue-200 text-blue-600 font-bold py-3 px-8 rounded-full" onClick={handleVote} >Vote</button>
+        </div>
+
+      )
+    
+      }
+      
     </div>
     
   );
