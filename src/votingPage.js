@@ -8,13 +8,13 @@ import Film from './components/Film'; // Import the Film component
 import NavbarComponent from './NavbarComponent';
 const VotingPage = () => {
   const [films, setFilms] = useState([
-    { id: 1, title: 'BARCA VS REAL', url: 'https://www.youtube.com/embed/tpIyMNGK07g?si=LyjDFHT7k188gVQV' },
-    { id: 2, title: 'CITY VS CHELSEA', url: 'https://www.youtube.com/embed/I-dHFeNM6pI?si=YLxToue6NkMf5vQN' },
-    { id: 3, title: 'PREMAM', url: 'https://www.youtube.com/embed/yjaFvFuQ-QM?si=GzjXcLTxr8rpGxQI"' },
-    { id: 4, title: 'KUMBALANGI NIGHTS', url: 'https://www.youtube.com/embed/bNyKd0PUx04?si=A-8wRwQ54z6HdxZ1' },
-    { id: 5, title: 'DRISHYAM', url: 'https://www.youtube.com/embed/AuuX2j14jms?si=Q9J9Z9JzQ9K9J9'},
-    { id: 6, title: 'KALY', url: 'https://www.youtube.com/embed/1Q0Z5Y4Y4Zo?si=Q9J9Z9JzQ9K9J9'},
-    { id: 7, title: 'ANGAMALY DIARIES', url: 'https://www.youtube.com/embed/9mRG1GVxtkY?si=Cku0LwmHIjIeAC34'},
+    { id: 1, title: 'BARCA VS REAL', url: 'https://www.youtube.com/embed/tpIyMNGK07g?si=LyjDFHT7k188gVQV' ,description: 'A thrilling football match between two of the biggest clubs in the world.'},
+    { id: 2, title: 'CITY VS CHELSEA', url: 'https://www.youtube.com/embed/I-dHFeNM6pI?si=YLxToue6NkMf5vQN', description: 'A high-stakes football match between two fierce rivals.' },
+    { id: 3, title: 'PREMAM', url: 'https://www.youtube.com/embed/yjaFvFuQ-QM?si=GzjXcLTxr8rpGxQI"', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
+    { id: 4, title: 'KUMBALANGI NIGHTS', url: 'https://www.youtube.com/embed/bNyKd0PUx04?si=A-8wRwQ54z6HdxZ1' , description: 'A heartwarming tale of family, love, and redemption.'},
+    { id: 5, title: 'DRISHYAM', url: 'https://www.youtube.com/embed/AuuX2j14jms?si=Q9J9Z9JzQ9K9J9', description: 'A gripping thriller that keeps you guessing until the very end.' },
+    { id: 6, title: 'KALY', url: 'https://www.youtube.com/embed/1Q0Z5Y4Y4Zo?si=Q9J9Z9JzQ9K9J9', description: 'A heartwarming tale of family, love, and redemption.' },
+    { id: 7, title: 'ANGAMALY DIARIES', url: 'https://www.youtube.com/embed/9mRG1GVxtkY?si=Cku0LwmHIjIeAC34', description: 'A gripping thriller that keeps you guessing until the very end.' },
     // Add more films here
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,14 +92,14 @@ const VotingPage = () => {
             </p>
             <a
               className="inline-block text-blue-700 font-bold py-2 px-4 hover:underline transition duration-300"
-              href="/gallery/967205/ranking/111448"
+              href="/ranking"
               target="_self"
             >
               View Ranking
             </a>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-10 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-0.5 sm:px-10 ">
             {films.map((film) => (
               <Film key={film.id} film={film} onVote={openModal} /> // Use the Film component
             ))}

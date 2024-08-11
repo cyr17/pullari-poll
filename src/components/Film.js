@@ -3,8 +3,7 @@ import React from 'react';
 const Film = ({ film, onVote }) => {
   return (
     <div className="p-4 rounded-lg shadow-md bg-white relative">
-      <h3 className="text-xl font-bold mb-2">{film.title}</h3>
-      <div className="aspect-w-16 aspect-h-9">
+      <div className="aspect-w-16 aspect-h-9 mb-4 rounded-lg overflow-hidden">
        
       <iframe
         className='absolute top-0 left-0 w-full h-full'
@@ -16,7 +15,11 @@ const Film = ({ film, onVote }) => {
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen
       />
+      
       </div>
+      
+      <h3 className="text-xl font-bold mb-2">{film.title}</h3>
+      <p className="text-gray-600 text-sm">{film.description}</p>
       <div className="flex justify-center mt-4">
    
       <button className="bg-blue-100 hover:bg-blue-200 text-blue-600 font-bold py-3 px-8 rounded-full" onClick={() => onVote(film.id)} >Vote</button>
