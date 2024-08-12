@@ -33,6 +33,7 @@ const VotingPage = () => {
       setIsOtpStage(true);
     } catch (error) {
       console.error('Error sending OTP:', error);
+      toast.error('Error Sending OTP');
     }
   };
 
@@ -42,6 +43,8 @@ const VotingPage = () => {
       if (response.data.success) {
         setIsModalOpen(false);
         toast.success('Verification successful!');
+        
+        toast.success('Your vote has been recorded!');
         handleVote(selectedFilmId);
       } else {
         console.error('OTP verification failed');
@@ -53,10 +56,6 @@ const VotingPage = () => {
     }
   };
 
-  const handleChangedVote = (filmId) => {
-    setSelectedFilmId(filmId);
-    toast.success('Vote changed successfully!');
-  };
 
   const handleVote = async (filmId) => {
     setIsVerified(true);
@@ -80,13 +79,14 @@ const VotingPage = () => {
     setIsOtpStage(false);
     setPhoneNumber('');
     setOtp('');
+
   };
 
   const voteForFilm = async (filmId) => {
     try {
       if (isVerified) {
         // Directly change the vote if the user is verified
-        
+        console.log(`Voting for filmId: ${filmId}`,isVerified);
         setSelectedFilmId(filmId);
         toast.success('Your vote has been changed!');
       } else {
@@ -183,10 +183,9 @@ const VotingPage = () => {
                         </div>
                       ) : (
                         <div>
-                          <div>
                             <div className="flex items-center justify-between">
                               <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
-                                Enter OtP
+                                Enter OTP
                               </label>
                             </div>
                             <div className="mt-2">
@@ -201,8 +200,7 @@ const VotingPage = () => {
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                               />
                             </div>
-                          </div>
-                          <div>
+                          <div className='mt-6'>
                             <Button
                               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                               onClick={handleVerifyOtp}

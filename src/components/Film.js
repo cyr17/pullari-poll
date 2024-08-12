@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 const Film = ({ film ,votedFilm, voteForFilm}) => {
   const handleVote = () => {
     voteForFilm(film.id);
-    toast.success('Your vote has been changed!');
   };
   return (
     <div className="p-4 rounded-lg shadow-md bg-white relative">
