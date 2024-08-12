@@ -12,6 +12,8 @@
     "dotenv": "^16.4.5",
     "flowbite": "^2.5.1",
     "flowbite-react": "^0.10.1",
+    "framer-motion": "^11.3.24",
+    "lucide-react": "^0.427.0",
     "mongoose": "^8.5.2",
     "postcss": "^8.4.41",
     "react": "^18.3.1",

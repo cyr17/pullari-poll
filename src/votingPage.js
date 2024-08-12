@@ -4,17 +4,19 @@ import { Modal, Navbar, Button } from 'flowbite-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import Film from './components/Film'; // Import the Film component
 import NavbarComponent from './NavbarComponent';
+import { DialogBasicFilm } from './components/dialogBasicFilm';
 const VotingPage = () => {
   const [films, setFilms] = useState([
-    { id: 1, title: 'BARCA VS REAL', url: 'https://www.youtube.com/embed/tpIyMNGK07g?si=LyjDFHT7k188gVQV' ,description: 'A thrilling football match between two of the biggest clubs in the world.'},
-    { id: 2, title: 'CITY VS CHELSEA', url: 'https://www.youtube.com/embed/I-dHFeNM6pI?si=YLxToue6NkMf5vQN', description: 'A high-stakes football match between two fierce rivals.' },
-    { id: 3, title: 'PREMAM', url: 'https://www.youtube.com/embed/yjaFvFuQ-QM?si=GzjXcLTxr8rpGxQI"', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
-    { id: 4, title: 'KUMBALANGI NIGHTS', url: 'https://www.youtube.com/embed/bNyKd0PUx04?si=A-8wRwQ54z6HdxZ1' , description: 'A heartwarming tale of family, love, and redemption.'},
-    { id: 5, title: 'DRISHYAM', url: 'https://www.youtube.com/embed/AuuX2j14jms?si=Q9J9Z9JzQ9K9J9', description: 'A gripping thriller that keeps you guessing until the very end.' },
-    { id: 6, title: 'KALY', url: 'https://www.youtube.com/embed/1Q0Z5Y4Y4Zo?si=Q9J9Z9JzQ9K9J9', description: 'A heartwarming tale of family, love, and redemption.' },
-    { id: 7, title: 'ANGAMALY DIARIES', url: 'https://www.youtube.com/embed/9mRG1GVxtkY?si=Cku0LwmHIjIeAC34', description: 'A gripping thriller that keeps you guessing until the very end.' },
+    { id: 1, title: 'SPADIKAM', url: 'https://www.youtube.com/embed/349z-tk5RUM?si=X1eaf7_0YzI-HTX9' ,description: 'A Cult Classic of a movie '},
+    { id: 2, title: 'NEW DELHI', url: 'https://www.youtube.com/embed/uB_S8Uf0n4U?si=zjQTGBf170V2aWGX', description: 'A gripping thriller that keeps you guessing until the very end.' },
+    { id: 3, title: 'NARASIMHAM', url: 'https://www.youtube.com/embed/Z3g5qGQK7eI?si=_VMGz8gExpZbXuW1', description: 'A high-stakes football match between two fierce rivals.' },
+    { id: 4, title: 'AMARAM', url: 'https://www.youtube.com/embed/Xqn4QaDz1Wo?si=Of0l7WQirryNpW8G', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
+    { id: 5, title: 'DEVADOOTHAN', url: 'https://www.youtube.com/embed/jb5FMCr1rSc?si=Y3yNVb9eF_Y0A72T', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
+    { id: 6, title: 'PREMAM', url: 'https://www.youtube.com/embed/yjaFvFuQ-QM?si=GzjXcLTxr8rpGxQI"', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
+    { id: 7, title: 'KUMBALANGI NIGHTS', url: 'https://www.youtube.com/embed/bNyKd0PUx04?si=A-8wRwQ54z6HdxZ1' , description: 'A heartwarming tale of family, love, and redemption.'},
+    { id: 8, title: 'DRISHYAM', url: 'https://www.youtube.com/embed/iGCkQi-QziE?si=3rJ3S_7M0NIoFGmF', description: 'A gripping thriller that keeps you guessing until the very end.' },
+    { id: 9, title: 'NEW DELHI', url: 'https://www.youtube.com/embed/uB_S8Uf0n4U?si=zjQTGBf170V2aWGX', description: 'A gripping thriller that keeps you guessing until the very end.' },
     // Add more films here
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -117,7 +119,10 @@ const VotingPage = () => {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-0.5 sm:px-10 ">
             {films.map((film) => (
-              <Film key={film.id} film={film} onVote={openModal} votedFilm={selectedFilmId} voteForFilm={voteForFilm}/> // Use the Film component
+              <div key={film.id} className="flex flex-col h-full">
+     
+              <DialogBasicFilm key={film.id} film={film} onVote={openModal} votedFilm={selectedFilmId} voteForFilm={voteForFilm}/>
+              </div>
             ))}
           </div>
           <Modal show={isModalOpen} onClose={closeModal}>
