@@ -48,7 +48,7 @@ const LandingPage = () => {
                       <span>CATHIES LANE RECEPTIONS</span>
                   </div>
               </div>
-              <div className="bg-white text-blue-600 font-bold py-2 px-8 rounded-full mt-2 flex items-center justify-center space-x-2">
+              <div className="bg-white text-blue-600 font-bold py-2 px-8 rounded-full mt-2 inline-flex items-center justify-center space-x-2">
                   <a href="https://app.orgnyse.com.au/121/short-flim-dinner-night">Book Seats</a>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-ticket">
                       <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
