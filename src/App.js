@@ -5,16 +5,20 @@ import VotingPage from './votingPage';
 import LandingPage from './landingPage'; // Import the LandingPage component
 import { About } from './components/About';
 import { Contact } from './components/Contact';
+import NavbarComponent from './NavbarComponent'; // Import the NavbarComponent component
 const App = () => {
   return (
     <Router>
+    <div>
+      <NavbarComponent /> {/* NavbarComponent is rendered here */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/voting" element={<VotingPage  />} />
+        <Route path="/voting" element={<VotingPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
       </Routes>
-    </Router>
+    </div>
+  </Router>
   );
 };
 export default App;

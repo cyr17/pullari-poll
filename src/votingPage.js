@@ -95,6 +95,7 @@ const VotingPage = () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/send-otp`, { userName, phoneNumber });
       console.log(response.data);
+      toast.success('OTP Sent Successfully');
       setIsOtpStage(true);
     } catch (error) {
       console.error('Error sending OTP:', error);
@@ -166,7 +167,6 @@ const VotingPage = () => {
 
   return (
     <div>
-      <NavbarComponent></NavbarComponent>
       <div className='bg-gray-100 py-8 px-10'>
         <div className='container mx-auto'>
           <img
@@ -175,7 +175,7 @@ const VotingPage = () => {
             alt="banner"
           />
           <div className="flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10">
-            <a href="/voting" className="bg-blue-600 text-white font-bold py-2 px-8 rounded-full mt-2">Book Tickets</a>
+            <a href="https://app.orgnyse.com.au/121/short-flim-dinner-night" className="bg-blue-600 text-white font-bold py-2 px-8 rounded-full mt-2">Book Tickets</a>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-0.5 sm:px-10 ">
@@ -187,18 +187,19 @@ const VotingPage = () => {
             ))}
           </div>
           <Modal show={isModalOpen} onClose={closeModal}>
-          <Modal.Header>User Verification</Modal.Header>
+          <Modal.Header>Pulari Short Film Festival -PSFF 2024</Modal.Header>
                 <Modal.Body>
                 <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                   <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <img
-                      alt="Pullari Short Film Competition"
-                      src="https://firebasestorage.googleapis.com/v0/b/ballistiks-cyr17.appspot.com/o/Logo-embossed.jpg?alt=media&token=6b22c355-355b-4919-a130-1c8f36584e79"
-                      className="mx-auto h-15 sm:h-48 rounded-full "
-                    />
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                      Sign in to your account
-                    </h2>
+                    <h1 className='text-2xl font-bold '>Voting Conditions</h1>
+                    <p className='text-lg font-normal mt-4'>
+                      1. Most voted film online will be selected as 'Audience Choice' category winner.<br />		
+                      2. Voting is limited to Australian mobile numbers only.<br />	
+                      3. A user can only vote for a single film, only the latest vote would be counted<br />	
+                      4. Pulari Short Film Festival committee holds the right to make any changes at any point of time.	<br />	
+                      5. In case of any disputes, Pulari Short Film Festival committee's decision will be final.		<br />	
+
+                    </p>
                   </div>
                   <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form action="#" method="POST" className="space-y-6">
