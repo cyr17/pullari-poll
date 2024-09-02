@@ -1,18 +1,44 @@
-import react from 'react';
-
+import React from 'react';
+import { Carousel } from 'flowbite-react';
+import NavbarComponent from './NavbarComponent';
 const LandingPage = () => {
-    return (
-        <div className="bg-cream min-h-screen flex flex-col items-center justify-center bg-cover bg-center" style={{ backgroundImage: 'url(/bg-film.png)' }}>
-          
-        <div className="flex flex-col items-center p-4 sm:p-0">
-        <img src="https://firebasestorage.googleapis.com/v0/b/ballistiks-cyr17.appspot.com/o/Logo-embossed.jpg?alt=media&token=6b22c355-355b-4919-a130-1c8f36584e79" alt="City Icon" className="mx-auto h-15 sm:h-48 rounded-full " />
-        
-        <h1 className="text-3xl font-bold mt-4">SHORT FILM COMPETITION</h1>
-        <h2 className="text-xl font-medium text-gray-400 mb-10">2024 CONTEST</h2>
-        <p className="text-lg font-medium">Vote for your favorite short film</p>
-        <a href="/voting" className="bg-blue-600 text-white font-bold py-2 px-8 rounded-full mt-6">VOTE</a>
+  return (
+    <div>
+      <NavbarComponent /> {/* Include the NavbarComponent */}
+      
+    <div className='container mx-auto w-fit'>
+      <div className="flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10 bg-white shadow-md rounded-lg">
+        <img src="/banner.PNG" alt="banner" className="w-full h-auto rounded-lg" />
+        <div className="flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10">
+          <a href="/voting" className="bg-blue-600 text-white font-bold py-2 px-8 rounded-full mt-2">Watch short films</a>
         </div>
+        <p className="text-2xl font-bold">PSFF 2024 SPONSORS</p><br />
+        <div className='w-full flex flex-col items-center p-0rounded-lg'>
+          <Carousel className="w-full">
+            <div className="relative w-full" style={{ paddingBottom: '52.36%' }}>
+              <img src="/event.PNG" alt='placeholder' className="absolute top-0 left-0 w-full h-full object-contain" />
+            </div>
+            <div className="relative w-full" style={{ paddingBottom: '52.36%' }}>
+              <img src="/gold.PNG" alt='placeholder' className="absolute top-0 left-0 w-full h-full object-contain" />
+            </div>
+            <div className="relative w-full" style={{ paddingBottom: '52.36%' }}>
+              <img src="/silver.PNG" alt='placeholder' className="absolute top-0 left-0 w-full h-full object-contain" />
+            </div>
+            <div className="relative w-full" style={{ paddingBottom: '52.36%' }}>
+              <img src="/bronze.PNG" alt='placeholder' className="absolute top-0 left-0 w-full h-full object-contain" />
+            </div>
+          </Carousel>
         </div>
-      );
-    };
+      </div>
+      <div className="flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10 bg-white shadow-md rounded-lg">
+        <img src="/awards_banner.PNG" alt="banner" className="w-full h-auto rounded-lg" />
+        <div className="flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10">
+          <a href="/voting" className="bg-blue-600 text-white font-bold py-2 px-8 rounded-full mt-2">Book Seats</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  );
+};
+
 export default LandingPage;

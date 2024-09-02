@@ -8,16 +8,79 @@ import NavbarComponent from './NavbarComponent';
 import { DialogBasicFilm } from './components/dialogBasicFilm';
 const VotingPage = () => {
   const [films, setFilms] = useState([
-    { id: 1, title: 'SPADIKAM', url: 'https://www.youtube.com/embed/349z-tk5RUM?si=X1eaf7_0YzI-HTX9' ,description: 'A Cult Classic of a movie '},
-    { id: 2, title: 'NEW DELHI', url: 'https://www.youtube.com/embed/uB_S8Uf0n4U?si=zjQTGBf170V2aWGX', description: 'A gripping thriller that keeps you guessing until the very end.' },
-    { id: 3, title: 'NARASIMHAM', url: 'https://www.youtube.com/embed/Z3g5qGQK7eI?si=_VMGz8gExpZbXuW1', description: 'A high-stakes football match between two fierce rivals.' },
-    { id: 4, title: 'AMARAM', url: 'https://www.youtube.com/embed/Xqn4QaDz1Wo?si=Of0l7WQirryNpW8G', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
-    { id: 5, title: 'DEVADOOTHAN', url: 'https://www.youtube.com/embed/jb5FMCr1rSc?si=Y3yNVb9eF_Y0A72T', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
-    { id: 6, title: 'PREMAM', url: 'https://www.youtube.com/embed/yjaFvFuQ-QM?si=GzjXcLTxr8rpGxQI"', description: 'A romantic drama that explores the highs and lows of a passionate relationship.' },
-    { id: 7, title: 'KUMBALANGI NIGHTS', url: 'https://www.youtube.com/embed/bNyKd0PUx04?si=A-8wRwQ54z6HdxZ1' , description: 'A heartwarming tale of family, love, and redemption.'},
-    { id: 8, title: 'DRISHYAM', url: 'https://www.youtube.com/embed/iGCkQi-QziE?si=3rJ3S_7M0NIoFGmF', description: 'A gripping thriller that keeps you guessing until the very end.' },
-    { id: 9, title: 'NEW DELHI', url: 'https://www.youtube.com/embed/uB_S8Uf0n4U?si=zjQTGBf170V2aWGX', description: 'A gripping thriller that keeps you guessing until the very end.' },
-    // Add more films here
+    {
+      "id": 1,
+      "title": "Spadikam",
+      "url": "https://www.youtube.com/embed/349z-tk5RUM?si=X1eaf7_0YzI-HTX9",
+      "director": "Bhadran",
+      "cast": "Mohanlal, Urvashi, Thilakan",
+      "synopsis": "Thomas leaves his village after constantly clashing with his heavy-handed father. Fourteen years later, Thomas returns home as the owner of a stone quarry and a small-time criminal. Father and son vow never to reconcile, causing immense distress to Thomas’ mother and younger sister."
+    },
+    {
+      "id": 2,
+      "title": "New Delhi",
+      "url": "https://www.youtube.com/embed/uB_S8Uf0n4U?si=zjQTGBf170V2aWGX",
+      "director": "Sibi Malayil",
+      "cast": "Mohanlal, Shobana, Thilakan",
+      "synopsis": "A suspenseful story about a man who gets caught in a web of intrigue and danger. He fights to clear his name and protect his loved ones. "
+    },
+    {
+      "id": 3,
+      "title": "Narasimham",
+      "url": "https://www.youtube.com/embed/Z3g5qGQK7eI?si=_VMGz8gExpZbXuW1",
+      "director": "Sibi Malayil",
+      "cast": "Mohanlal, Shobana, Thilakan",
+      "synopsis": "A powerful story of a man who seeks revenge on those who have wronged him. He uses his skills and intelligence to bring them down. "
+    },
+    {
+      "id": 4,
+      "title": "Amaram",
+      "url": "https://www.youtube.com/embed/Xqn4QaDz1Wo?si=Of0l7WQirryNpW8G",
+      "director": "Bharathan",
+      "cast": "Mohanlal, Parvathy, Thilakan",
+      "synopsis": "A man struggles to balance his love for two women. He faces a moral dilemma and must choose between his heart and his head. "
+    },
+    {
+      "id": 5,
+      "title": "Devaadoothan",
+      "url": "https://www.youtube.com/embed/jb5FMCr1rSc?si=Y3yNVb9eF_Y0A72T",
+      "director": "Sibi Malayil",
+      "cast": "Mohanlal, Shobana, Thilakan",
+      "synopsis": "A man falls in love with a woman who is already married. He faces many challenges in his quest for love. "
+    },
+    {
+      "id": 6,
+      "title": "Premam",
+      "url": "https://www.youtube.com/embed/yjaFvFuQ-QM?si=GzjXcLTxr8rpGxQI",
+      "director": "Alphonse Puthren",
+      "cast": "Nivin Pauly, Sai Pallavi, Madonna Sebastian",
+      "synopsis": "A coming-of-age story about a man who falls in love at different stages of his life. He learns about love, loss, and life. "
+    },
+    {
+      "id": 7,
+      "title": "Kumbalangi Nights",
+      "url": "https://www.youtube.com/embed/bNyKd0PUx04?si=A-8wRwQ54z6HdxZ1",
+      "director": "Madhu C. Narayanan",
+      "cast": "Shane Nigam, Soubin Shahir, Sreenath Bhasi",
+      "synopsis": "A story about four brothers who face a crisis in their lives. They must learn to work together to overcome their problems. "
+    },
+    {
+      "id": 8,
+      "title": "Drishyam",
+      "url": "https://www.youtube.com/embed/iGCkQi-QziE?si=3rJ3S_7M0NIoFGmF",
+      "director": "Jeethu Joseph",
+      "cast": "Mohanlal, Meena, Asha Sarath",
+      "synopsis": "A man is accused of murder and he must use his intelligence and cunning to protect his family from the police. "
+    },
+    {
+      "id": 9,
+      "title": "New Delhi",
+      "url": "https://www.youtube.com/embed/uB_S8Uf0n4U?si=zjQTGBf170V2aWGX",
+      "director": "Sibi Malayil",
+      "cast": "Mohanlal, Shobana, Thilakan",
+      "synopsis": "A suspenseful story about a man who gets caught in a web of intrigue and danger. He fights to clear his name and protect his loved ones. "
+    },
+  
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOtpStage, setIsOtpStage] = useState(false);
@@ -105,16 +168,14 @@ const VotingPage = () => {
     <div>
       <NavbarComponent></NavbarComponent>
       <div className='bg-gray-100 py-8 px-10'>
-        <div className='container mx-auto mt-8'>
+        <div className='container mx-auto'>
           <img
-            className="w-full max-w-full rounded-lg shadow-lg mt-4"
-            src="https://firebasestorage.googleapis.com/v0/b/ballistiks-cyr17.appspot.com/o/PSFF%20Banner.JPG?alt=media&token=ca1a5fbc-76d6-465c-aa92-39e492ed62b1"
-            alt="Sponsor"
+            className="w-full max-w-full rounded-lg shadow-lg"
+            src="/banner.PNG"
+            alt="banner"
           />
-          <div className="text-center">
-            <p className="text-lg text-center text-black mb-8">
-              Step into a world of cinematic wonders and cast your vote for the most captivating film!
-            </p>
+          <div className="flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10">
+            <a href="/voting" className="bg-blue-600 text-white font-bold py-2 px-8 rounded-full mt-2">Book Tickets</a>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-0.5 sm:px-10 ">
