@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.synopsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 4; /* Show 4 lines max */
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.synopsis.expanded {
+  -webkit-line-clamp: unset;
+}
+
+.synopsis::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+  background: linear-gradient(to bottom, transparent, white);
+  display: block;
+  pointer-events: none;
+}
+
+.synopsis.expanded::after {
+  display: none;
+}
