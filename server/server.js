@@ -24,7 +24,10 @@ const {ObjectId} = mongoose.Schema.Types;
 
 const voteSchema = new mongoose.Schema({
     user: {type: ObjectId, ref: 'User'},
-    filmId: {type: String, required: true}
+    userName: {type: String, required: true},
+    filmId: {type: String, required: true},
+    phoneNumber: {type: String, required: true},
+    timeStamp: {type: Date, default: Date.now}
 });
 
 const Vote = mongoose.model('Vote', voteSchema);
@@ -73,30 +76,23 @@ app.post('/send-otp', cors(corsOptions), async (req, res) => {
   
   //changing phone number format to +61 replace the first char if 0 with +61
   const formattedPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.replace('0', '+61') : phoneNumber;
-  console.log("LOGIN",formattedPhoneNumber,userName);
-  
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   const message = `Your OTP to verify your vote is ${otp}`;
 
   try{
     
-      console.log("TRYING",phoneNumber);
       const user = await User.findOne({phoneNumber: formattedPhoneNumber});
       if(user){
         user.otp = otp;
         await user.save();
-        console.log("UPDATED",user);
       }
       else{
-        console.log("NEW USER");
         const newUser = new User();
         newUser.name = userName;
         newUser.phoneNumber= formattedPhoneNumber,
         newUser.otp = otp;
         await newUser.save();
-        console.log("SAVEDD",newUser);
       }
-    console.log("SENDING OTP");
 
     await client.messages.create({
       body: message,
@@ -116,10 +112,9 @@ app.post('/verify-otp', cors(corsOptions), async (req, res) => {
   const { phoneNumber, otp } = req.body;
   
   const formattedPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.replace('0', '+61') : phoneNumber;
-  console.log("VERIFY OTP",phoneNumber,otp);
     try {
       const user = await User.findOne({phoneNumber: formattedPhoneNumber});
-      console.log("USER",user);
+      
       if ( user.otp === otp ) {
         user.isVerified = true;
         await user.save();
@@ -135,7 +130,6 @@ app.post('/verify-otp', cors(corsOptions), async (req, res) => {
 
 app.get('/is-verified', cors(corsOptions), async (req, res) => {
   const { phoneNumber } = req.query;
-  
   const formattedPhoneNumber = phoneNumber.startsWith('0') ? phoneNumber.replace('0', '+61') : phoneNumber;
   try {
     const user = await User.findOne({ phoneNumber: formattedPhoneNumber });
@@ -157,9 +151,19 @@ app.post('/vote', cors(corsOptions), async (req, res) => {
       user.vote = filmId;
       await user.save();
 
+      const previousVote = await Vote.findOne({ phoneNumber: formattedPhoneNumber });
+
+      // Delete the previous vote if it exists
+      if (previousVote) {
+          await Vote.deleteOne({ _id: previousVote._id });
+      }
+
+
       const vote = new Vote();
       vote.user = user._id;
+      vote.userName = user.name;
       vote.filmId = filmId;
+      vote.phoneNumber = formattedPhoneNumber;
       await vote.save();
 
       res.send({ success: true });
@@ -185,6 +189,17 @@ app.get('/results', cors(corsOptions), async (req, res) => {
       }
     });
     res.send({ success: true, results });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false, error });
+  }
+}
+);
+
+app.get('/votes', cors(corsOptions), async (req, res) => {
+  try {
+    const votes = await Vote.find({});
+    res.send({ success: true, votes });
   } catch (error) {
     console.log(error);
     res.status(500).send({ success: false, error });

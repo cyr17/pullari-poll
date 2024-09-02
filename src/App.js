@@ -7,6 +7,7 @@ import { About } from './components/About';
 import { Contact } from './components/Contact';
 import NavbarComponent from './NavbarComponent'; // Import the NavbarComponent component
 import Results from './components/Results';
+import VotingList from './components/VotingList';
 const App = () => {
   return (
     <Router>
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path='/results' element={<Results />} />
+        <Route path='/votingData' element={<VotingList />} />
       </Routes>
     </div>
   </Router>

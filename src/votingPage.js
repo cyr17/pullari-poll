@@ -21,7 +21,6 @@ const VotingPage = () => {
   const handleSendOtp = async () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/send-otp`, { userName, phoneNumber });
-      console.log(response.data);
       toast.success('OTP Sent Successfully');
       setIsOtpStage(true);
     } catch (error) {
@@ -37,8 +36,8 @@ const VotingPage = () => {
         setIsModalOpen(false);
         toast.success('Verification successful!');
         
-        toast.success('Your vote has been recorded!');
         handleVote(selectedFilmId);
+        
       } else {
         console.error('OTP verification failed');
         toast.error('OTP verification failed');
@@ -53,12 +52,14 @@ const VotingPage = () => {
   const handleVote = async (filmId) => {
     setIsVerified(true);
     try {
-      console.log(`Voting for filmId: ${filmId}`);
       const response = await axios.post(`${API_BASE_URL}/vote`, { filmId, phoneNumber });
-      console.log(response.data);
+      
+      
+      toast.success('Your vote has been recorded!');
       // Update results or handle response as needed
     } catch (error) {
       console.error('Error voting:', error);
+      toast.error('Error voting');
     }
   };
 
@@ -79,9 +80,8 @@ const VotingPage = () => {
     try {
       if (isVerified) {
         // Directly change the vote if the user is verified
-        console.log(`Voting for filmId: ${filmId}`,isVerified);
+        await handleVote(filmId);
         setSelectedFilmId(filmId);
-        toast.success('Your vote has been changed!');
       } else {
         // Open modal for verification
         setSelectedFilmId(filmId);
@@ -96,11 +96,13 @@ const VotingPage = () => {
     <div>
       <div className='bg-gray-100 py-8 px-10'>
         <div className='container mx-auto'>
+        <div className="flex justify-center">
           <img
-            className="w-full max-w-full rounded-lg shadow-lg"
+            className="w-auto max-h-[20vh] rounded-lg shadow-lg"
             src="/banner.PNG"
             alt="banner"
           />
+        </div>
           <div className="flex flex-col items-center p-4 sm:p-6 md:p-8 lg:p-10">
             <a href="https://app.orgnyse.com.au/121/short-flim-dinner-night" className="bg-blue-600 text-white font-bold py-2 px-8 rounded-full mt-2">Book Tickets</a>
           </div>

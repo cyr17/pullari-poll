@@ -33,3 +33,9 @@
   color: blue;
   cursor: pointer;
 }
+
+.banner-image {
+    width: 100%;
+    max-height: 15vh; /* Adjust this value to control the height */
+    object-fit: cover; /* Ensure the image covers the entire area */
+  }

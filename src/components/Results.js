@@ -8,10 +8,10 @@ const getYouTubeThumbnail = (url) => {
     return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
   };
 
+const API_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
 const Results = () => {
   const [entries, setEntries] = useState([]);
 
-    const API_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   useEffect(() => {
     const fetchResults = async () => {
       try {
