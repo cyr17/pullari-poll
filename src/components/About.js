@@ -22,7 +22,7 @@ export const About = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <h2 className="text-xl font-bold mb-4">About Pulllari Victoria Inc</h2>
+                    <h2 className="text-xl font-bold mb-4">About Pulari Victoria Inc</h2>
                     <p className="mb-4">
                         Pulari Victoria Inc. was formed in 2005 as a cultural organisation for the Indian community in Melbourne. From its humble beginning, Pulari is now a well established community organisation that plays a crucial role in fostering a strong and cohesive society. Facilitating effective communication and collaboration among its members and the wider community, the organisation in its present state is proven to conduct events and cultural programs in a multitude of manners.
                     </p>
