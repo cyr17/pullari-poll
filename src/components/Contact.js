@@ -13,7 +13,7 @@ export const Contact = () => {
                         <h1 className="text-4xl font-bold text-white mb-4">Contact Us</h1>
                         <p className="text-lg text-white mb-8">Have any enquiries or suggestions. Feel free to reach us via:</p>
                         <div className="flex flex-col p-0 sm:p-0">
-                            <p className="text-2xl font-bold mt-10">Pullari Short Film Festival - PSFF2024</p>
+                            <p className="text-2xl font-bold mt-10">Pulari Short Film Festival - PSFF2024</p>
                             <p className="text-xl font-normal mt-4">
                                 Tom Joseph 0423923466<br />
                                 Roopesh Eringathodi 0411566629<br />

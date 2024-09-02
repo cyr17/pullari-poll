@@ -15,7 +15,14 @@ const Results = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/results`);
+        const response = await axios.get(`${API_BASE_URL}/results`,
+          {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            }
+          }
+        );
         if (response.status === 200) {
           const results = response.data.results;
           const updatedEntries = filmsList.map(film => ({
