@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 export const filmsList = [
     {
       "id": 1,
@@ -68,7 +66,7 @@ export const filmsList = [
     {
         "id": 10,
         "title": "Thrasavedam",
-        "url": "", // Add the appropriate URL here
+        "url": "https://www.youtube.com/embed/CGwxsbbJFlo?si=fSrnzPe-RjfA1KBb", // Add the appropriate URL here
         "director": "Joseph Eby",
         "synopsis": "Veda is a young married woman who has been paralysed and bedridden for many years. Eventually she passes away but her youthful spirit is not yet ready to depart from the universe as she still yearns to live. Following her death her soul lingers in the house wandering through the rooms. Her soul relishes revisiting the house after a long time and cherishes her remaining time in the universe. Suddenly her husband returns from the shop and discovers her lifeless body on the bed. The rest of the film unfolds through some eerie and suspenseful moments."
       },
@@ -131,7 +129,7 @@ export const filmsList = [
     {
         "id": 19,
         "title": "The Nightmare",
-        "url": "", // Add the appropriate URL here
+        "url": "https://www.youtube.com/embed/k1xuDWBk90U?si=zYNm7r2dR7LA-to5",
         "director": "Uday Haridas",
         "synopsis": "The movie delves into the realms of fear guilt and retribution. This film is a psychological thriller that aims to grip the audience and take them on a journey through the darkest corners of the human psyche. The inspiration for 'The Nightmare' is from the unsettling feeling of vulnerability that often accompanies quietest moments of life."
     },
