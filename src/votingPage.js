@@ -10,6 +10,7 @@ import { filmsList } from './components/FilmList';
 const VotingPage = () => {
   const [films, setFilms] = useState(filmsList);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOtpSending, setIsOtpSending] = useState(false);
   const [isOtpStage, setIsOtpStage] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,6 +20,7 @@ const VotingPage = () => {
   const API_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
 
   const handleSendOtp = async () => {
+    setIsOtpSending(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/send-otp`, { userName, phoneNumber });
       toast.success('OTP Sent Successfully');
@@ -27,6 +29,10 @@ const VotingPage = () => {
       console.error('Error sending OTP:', error);
       toast.error('Error Sending OTP');
     }
+    finally {
+      setIsOtpSending(false);
+    }
+
   };
 
   const handleVerifyOtp = async () => {
@@ -73,6 +79,9 @@ const VotingPage = () => {
     setIsOtpStage(false);
     setPhoneNumber('');
     setOtp('');
+    if (!isVerified) {
+      setSelectedFilmId(null);
+    }
 
   };
 
@@ -173,8 +182,9 @@ const VotingPage = () => {
                           <Button
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             onClick={handleSendOtp}
+                            disabled={isOtpSending}
                           >
-                            Verify Number
+                             {isOtpSending ? 'Sending...' : 'Verify Number'}
                           </Button>
                         </div>
                       ) : (
@@ -196,14 +206,20 @@ const VotingPage = () => {
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                               />
                             </div>
-                          <div className='mt-6'>
-                            <Button
-                              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                              onClick={handleVerifyOtp}
-                            >
-                              Verify OTP
-                            </Button>
-                          </div>
+                            <div className='mt-6 flex justify-between'>
+                              <Button
+                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                onClick={handleVerifyOtp}
+                              >
+                                Verify OTP
+                              </Button>
+                              <Button
+                                className="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 ml-4"
+                                onClick={() => setIsOtpStage(false)}
+                              >
+                                Edit Number
+                              </Button>
+                            </div>
                         </div>
                       )}
                     </form>
