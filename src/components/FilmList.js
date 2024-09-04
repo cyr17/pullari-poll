@@ -6,13 +6,12 @@ export const filmsList = [
       "director": "Unnee Udayakumar",
       "synopsis": "A Painter living in solitude and a reputed Dancer are on a common quest of self-discovery. Unaware of each other's existence yet inexplicably connected to one another they seek to know the Ultimate Truth."
     },
-    
     {
-        "id": 2,
-        "title": "Born Again",
-        "url": "https://www.youtube.com/embed/RzUF74h2E2Y?si=2YsVFCfQcc1iI5sk", // Add the appropriate URL here
-        "director": "Sanish Sam",
-        "synopsis": "Born Again is a drama/romance film written and directed by Sanish Sam that tells the story of Joe who orchestrates a heartfelt reunion with his wife Ivanna at Pinnacle Point, the very place where he proposed to her years ago. The film beautifully explores the enduring nature of love and the delicate interplay between our personal lives and the world around us. Through Joe's profound connection with nature and the gradual unveiling of his deep relationship with Ivanna, Born Again showcases the resilience and depth of their love."
+      "id": 2,
+      "title": "The Final Cut",
+      "url": "https://www.youtube.com/embed/i7lJqNQbrY8?si=zVvzyEdQH6nOzYQw",
+      "director": "Renjith Ravi",
+      "synopsis": "The Final Cut is a chilling tale of a lonely woman who finds herself trapped in an eerie, desolate forest. As she navigates the dark, twisting paths, she becomes increasingly aware of a sinister presence lurking in the shadows. With every step, the forest tightens its grip, and the line between reality and nightmare blurs. What fate awaits her in this haunting wilderness? The Final Cut is a suspenseful short film that keeps viewers on edge, questioning what is real and what lies beyond the darkness."
     },
     {
         "id": 3,
@@ -147,11 +146,5 @@ export const filmsList = [
       "director": "Jezreel Jayakumar",
       "synopsis": "Story of a young boy who undergo an emotional roller coaster after the death of his pet dog."
     },
-    {
-      "id": 22,
-      "title": "The Final Cut",
-      "url": "https://www.youtube.com/embed/i7lJqNQbrY8?si=zVvzyEdQH6nOzYQw",
-      "director": "Renjith Ravi",
-      "synopsis": "The Final Cut is a chilling tale of a lonely woman who finds herself trapped in an eerie, desolate forest. As she navigates the dark, twisting paths, she becomes increasingly aware of a sinister presence lurking in the shadows. With every step, the forest tightens its grip, and the line between reality and nightmare blurs. What fate awaits her in this haunting wilderness? The Final Cut is a suspenseful short film that keeps viewers on edge, questioning what is real and what lies beyond the darkness."
-    }
+    
   ];  
