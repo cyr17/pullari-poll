@@ -16,7 +16,7 @@ export const Contact = () => {
                             <p className="text-2xl font-bold mt-10">Pulari Short Film Festival - PSFF2024</p>
                             <p className="text-xl font-normal mt-4">
                                 Tom Joseph 0423923466<br />
-                                Roopesh Eringathodi 0411566629<br />
+                                Roopesh Eringa 0411566629<br />
                             </p>
                             <p className="text-xl font-bold mt-10">Email ID:</p>
                             <p className="text-xl font-normal mt-4">psffpulari@gmail.com</p>
