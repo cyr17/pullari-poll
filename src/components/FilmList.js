@@ -136,7 +136,7 @@ export const filmsList = [
       "id": 20,
       "title": "YAATHIRAI",
       "url": "https://www.youtube.com/embed/JZrBK4UKeiw?si=TUYa9TOcP0vlcacT",
-      "director": "Biju Gangadharan",
+      "director": "Bharath Varman",
       "synopsis": "When Yatra is asked the simple yet profound question, 'Do you know the difference between being alone and lonely?' he's compelled to reflect on his past, particularly his relationship with Yazhini. As he takes a trip down memory lane, Yatra revisits the moments they shared, searching for the point where everything started to unravel. Through his introspection, Yatra confronts the complexities of love, loss, and the subtle line between solitude and loneliness. Alone or Lonely? is a poignant short film that explores the impact of unspoken emotions and the search for closure in the wake of a broken connection."
     },
     {
