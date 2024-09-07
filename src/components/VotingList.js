@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { exportToExcel } from './exportCsv';
 const API_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
 
 const VotingList = () => {
@@ -51,7 +51,16 @@ const [password, setPassword] = useState('');
             {isAuthenticated ?(
         <>
       <div>
-            <h1 className="text-3xl font-bold mb-4">Votes:</h1>
+      <div className="flex justify-between items-center mb-4">
+                
+            <h1 className="text-3xl font-bold mb-4">Voting Data</h1>
+                <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    onClick={() => exportToExcel(votes)}
+                >
+                    Export Data
+                </button>
+            </div>
             <ul className="list-none p-0 m-0">
                 {votes.map((vote) => (
                     <li key={vote._id} className="mb-4">
