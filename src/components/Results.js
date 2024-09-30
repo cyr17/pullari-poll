@@ -60,22 +60,6 @@ const [password, setPassword] = useState('');
       return;
     }
 
-    // const response = await axios.get(`${API_BASE_URL}/login`, {
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   params: {
-    //     name: userName,
-    //     password: password,
-    //   },
-    // });
-    // if (response.status === 200) {
-    //   setIsAuthenticated(true);
-    // } else {
-    //   alert('Invalid credentials');
-    // }
-
     if (userName === process.env.REACT_APP_ADMIN_NAME && password === process.env.REACT_APP_ADMIN_PASSWORD) {
       setIsAuthenticated(true);
     } else {
