@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { filmsList } from '../components/FilmList'; // Adjust the path as necessary
-
+import { exportToExcel } from './exportCsv';
 
 const getYouTubeThumbnail = (url) => {
     const videoId = url.split('/embed/')[1]?.split('?')[0];
@@ -59,7 +59,23 @@ const [password, setPassword] = useState('');
       alert('Please enter your name and password');
       return;
     }
-    console.log(userName+password,process.env.REACT_APP_ADMIN_NAME,process.env.REACT_APP_ADMIN_PASSWORD);
+
+    // const response = await axios.get(`${API_BASE_URL}/login`, {
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   params: {
+    //     name: userName,
+    //     password: password,
+    //   },
+    // });
+    // if (response.status === 200) {
+    //   setIsAuthenticated(true);
+    // } else {
+    //   alert('Invalid credentials');
+    // }
+
     if (userName === process.env.REACT_APP_ADMIN_NAME && password === process.env.REACT_APP_ADMIN_PASSWORD) {
       setIsAuthenticated(true);
     } else {
